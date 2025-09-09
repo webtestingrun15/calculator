@@ -32,3 +32,18 @@ function operate(firstNumber,operator,secondNumber){
     return divide(firstNumber, secondNumber);
   }
 }
+
+const input = document.querySelector("#display");
+const numButtons = document.querySelectorAll(".calc-btn-num");
+let display;
+
+function displayDigit() {
+  numButtons.forEach(item => {
+    item.addEventListener('click', () => {
+      input.value = item.textContent;
+      display = input.value;
+    })
+  })
+}
+
+displayDigit();
