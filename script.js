@@ -40,7 +40,7 @@ let display;
 function displayDigit() {
   numButtons.forEach(item => {
     item.addEventListener('click', () => {
-      input.value = item.textContent;
+      input.value += item.textContent;
       secondNumber = firstNumber;
       firstNumber = input.value;
     })
