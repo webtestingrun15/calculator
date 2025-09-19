@@ -1,6 +1,6 @@
-let firstNumber;
+let currentNumber;
 let operator;
-let secondNumber;
+let previousNumber;
 
 function add(a,b) {
   return a + b;
@@ -18,33 +18,49 @@ function divide(a,b) {
   return a / b;
 }
 
-function operate(firstNumber,operator,secondNumber){
+let operate = function(previousNumber, operator, currentNumber){
   if (operator === '+') {
-    return add(firstNumber,secondNumber);
+    return add(previousNumber, currentNumber);
   }
   if (operator === '-') {
-    return subtract(firstNumber, secondNumber);
+    return subtract(previousNumber, currentNumber);
   }
   if (operator === '*') {
-    return multiply(firstNumber, secondNumber);
+    return multiply(previousNumber, currentNumber);
   }
   if (operator === '/') {
-    return divide(firstNumber, secondNumber);
+    return divide(previousNumber, currentNumber);
   }
 }
 
-const input = document.querySelector("#display");
-const numButtons = document.querySelectorAll(".calc-btn-num");
-let display;
 
+let display;
+let numButtons = document.querySelectorAll(".calc-btn-num");
+const operatorButtons = document.querySelectorAll(".calc-btn-func");
+const input = document.querySelector("#display");
+const sbtn = document.querySelector(".calc-btn-submit");
+let total;
 function displayDigit() {
+
   numButtons.forEach(item => {
     item.addEventListener('click', () => {
-      input.value += item.textContent;
-      secondNumber = firstNumber;
-      firstNumber = input.value;
+      input.value += Number(item.textContent);
+      display = input.value;
+      currentNumber = +display;
     })
   })
-}
 
+  operatorButtons.forEach(item => {
+    item.addEventListener('click', () => {
+      operator = item.textContent;
+      input.value = "";
+      previousNumber = +currentNumber;
+    })
+  })
+
+  sbtn.addEventListener("click", () => {
+    input.value = operate(previousNumber,operator,currentNumber);
+  });
+
+}
 displayDigit();
