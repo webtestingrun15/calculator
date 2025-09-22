@@ -40,11 +40,18 @@ const operatorButtons = document.querySelectorAll(".calc-btn-func");
 const input = document.querySelector("#display");
 const sbtn = document.querySelector(".calc-btn-submit");
 const clear = document.querySelector(".calc-btn-clear");
-let total;
+let total = "";
 function displayDigit() {
 
   numButtons.forEach(item => {
     item.addEventListener('click', () => {
+      if(total !== ""){
+        input.value = "";
+        previousNumber = "";
+        currentNumber = "";
+        operator = "";
+        total = "";
+      }
       input.value += Number(item.textContent);
       display = input.value;
       currentNumber = +display;
@@ -61,6 +68,7 @@ function displayDigit() {
 
   sbtn.addEventListener("click", () => {
     input.value = operate(previousNumber,operator,currentNumber);
+    total = input.value;
   });
 
   clear.addEventListener("click", () => {
@@ -68,6 +76,7 @@ function displayDigit() {
     previousNumber = "";
     currentNumber = "";
     operator = "";
+    total = "";
   });
 
 }
