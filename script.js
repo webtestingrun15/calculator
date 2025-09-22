@@ -1,6 +1,6 @@
-let currentNumber;
-let operator;
-let previousNumber;
+let currentNumber = "";
+let operator = "";
+let previousNumber = "";
 
 function add(a,b) {
   return a + b;
@@ -39,6 +39,7 @@ let numButtons = document.querySelectorAll(".calc-btn-num");
 const operatorButtons = document.querySelectorAll(".calc-btn-func");
 const input = document.querySelector("#display");
 const sbtn = document.querySelector(".calc-btn-submit");
+const clear = document.querySelector(".calc-btn-clear");
 let total;
 function displayDigit() {
 
@@ -48,7 +49,7 @@ function displayDigit() {
       display = input.value;
       currentNumber = +display;
     })
-  })
+  });
 
   operatorButtons.forEach(item => {
     item.addEventListener('click', () => {
@@ -56,10 +57,17 @@ function displayDigit() {
       input.value = "";
       previousNumber = +currentNumber;
     })
-  })
+  });
 
   sbtn.addEventListener("click", () => {
     input.value = operate(previousNumber,operator,currentNumber);
+  });
+
+  clear.addEventListener("click", () => {
+    input.value = "";
+    previousNumber = "";
+    currentNumber = "";
+    operator = "";
   });
 
 }
