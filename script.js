@@ -33,24 +33,24 @@ let operate = function(previousNumber, operator, currentNumber){
   }
 }
 
-
 let display;
 let numButtons = document.querySelectorAll(".calc-btn-num");
 const operatorButtons = document.querySelectorAll(".calc-btn-func");
 const input = document.querySelector("#display");
 const sbtn = document.querySelector(".calc-btn-submit");
 const clear = document.querySelector(".calc-btn-clear");
+let oldOperator = "";
 let total = "";
+
 function displayDigit() {
 
   numButtons.forEach(item => {
     item.addEventListener('click', () => {
       if(total !== ""){
+        clearValues();
+      }
+      if(oldOperator !== ""){
         input.value = "";
-        previousNumber = "";
-        currentNumber = "";
-        operator = "";
-        total = "";
       }
       input.value += Number(item.textContent);
       display = input.value;
@@ -62,7 +62,13 @@ function displayDigit() {
     item.addEventListener('click', () => {
       operator = item.textContent;
       input.value = "";
-      previousNumber = +currentNumber;
+      if (previousNumber !== "") {
+        previousNumber = operate(previousNumber, oldOperator, currentNumber);
+        input.value = previousNumber;
+      } else {
+        oldOperator = operator;
+        previousNumber = +currentNumber;
+      }
     })
   });
 
@@ -72,12 +78,17 @@ function displayDigit() {
   });
 
   clear.addEventListener("click", () => {
-    input.value = "";
-    previousNumber = "";
-    currentNumber = "";
-    operator = "";
-    total = "";
+    clearValues();
   });
 
 }
 displayDigit();
+
+function clearValues() {
+  input.value = "";
+  previousNumber = "";
+  currentNumber = "";
+  operator = "";
+  oldOperator = "";
+  total = "";
+}
