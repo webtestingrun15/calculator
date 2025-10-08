@@ -39,6 +39,7 @@ const operatorButtons = document.querySelectorAll(".calc-btn-func");
 const input = document.querySelector("#display");
 const sbtn = document.querySelector(".calc-btn-submit");
 const clear = document.querySelector(".calc-btn-clear");
+const decimal = document.querySelector(".calc-btn-decimal")
 let oldOperator = "";
 let total = "";
 
@@ -49,12 +50,12 @@ function displayDigit() {
       if(total !== ""){
         clearValues();
       }
-      if(oldOperator !== ""){
+      if(oldOperator !== "" && +input.value === previousNumber){
         input.value = "";
       }
-      input.value += Number(item.textContent);
+      input.value += item.textContent;
       display = input.value;
-      currentNumber = +display;
+      currentNumber = display;
     })
   });
 
@@ -62,19 +63,25 @@ function displayDigit() {
     item.addEventListener('click', () => {
       operator = item.textContent;
       input.value = "";
-      if (previousNumber !== "") {
-        previousNumber = operate(previousNumber, oldOperator, currentNumber);
+      if (previousNumber !== "" ) {
+        previousNumber = operate(+previousNumber, oldOperator, +currentNumber);
         input.value = previousNumber;
+        previousNumber = previousNumber;
       } else {
         oldOperator = operator;
-        previousNumber = +currentNumber;
+        previousNumber = currentNumber;
       }
     })
   });
 
   sbtn.addEventListener("click", () => {
-    input.value = operate(previousNumber,operator,currentNumber);
+    if (+previousNumber === 0 && operator === '/'){
+      input.value = "ROFL no!";
+      total = input.value;
+    } else {
+    input.value = operate(+previousNumber,operator,+currentNumber);
     total = input.value;
+    }
   });
 
   clear.addEventListener("click", () => {
