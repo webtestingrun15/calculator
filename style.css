@@ -1,0 +1,34 @@
+.calc {
+    border: 1px solid #000;
+    display: flex;
+    max-width: 108px;
+    flex-direction: column;
+    padding: 5px;
+    gap: 5px;
+}
+
+
+.calc-body {
+    display: flex;
+    gap: 2px;
+}
+
+.calc-nums {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.calc-symbols {
+    display: flex;
+    flex-direction: column;
+}
+
+.calc-symbols > * {
+    background-color: yellow;
+    margin-bottom: 1px;
+}
+
+.calc-symbols > *:hover {
+    background-color: initial;
+    margin-bottom: 1px;
+}
