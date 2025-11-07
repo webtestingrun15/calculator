@@ -1,4 +1,18 @@
+/* 1. Use a more-intuitive box-sizing model */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+    margin: 0;
+}
+
 body {
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,7 +22,7 @@ body {
 .calc {
     border: 1px solid #000;
     display: flex;
-    max-width: 97px;
+    max-width: 110px;
     flex-direction: column;
     padding: 5px;
     gap: 5px;
@@ -17,28 +31,35 @@ body {
 
 .calc-body {
     display: flex;
-    gap: 2px;
+    gap: 1px;
 }
 
 .calc-nums {
     display: flex;
     flex-wrap: wrap;
+    gap: 1px;
 }
 
 .calc-symbols {
     display: flex;
     flex-direction: column;
+    gap: 1px;
 }
 
 .calc-symbols > * {
     background-color: #ffff00;
-    margin-bottom: 1px;
 }
 
 .calc-symbols > *:hover {
     background-color: initial;
 }
 
+
+.calc-nums > * {
+    flex: 1;
+}
+
+
 .calc-btn-clear {
-    width: 66%;
+    flex: 2;
 }
